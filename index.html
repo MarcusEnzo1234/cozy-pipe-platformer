@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <title>Cozy Pipe Platformer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="wrap">
+    <canvas id="game"></canvas>
+
+    <!-- UI Layer -->
+    <div id="ui">
+      <div class="topbar">
+        <div class="chip">🌤️ Cozy Pipe Platformer</div>
+        <div class="chip" id="hud">
+          Coins: <span id="coins">0</span> • Hearts: <span id="hearts">3</span>
+        </div>
+        <div class="right">
+          <button class="btn" id="btnFs">⛶ Fullscreen</button>
+          <button class="btn" id="btnRestart">↻ Restart</button>
+        </div>
+      </div>
+
+      <!-- Title Screen -->
+      <div id="screenTitle" class="screen">
+        <div class="card titleCard">
+          <img id="logoImg" class="logo" alt="Cozy Pipe Platformer logo" />
+          <div class="subtitle">A cozy, kid-friendly pixel platform adventure ✨</div>
+
+          <div class="menu">
+            <button class="menuBtn" id="btnStart">▶ Start Game</button>
+            <button class="menuBtn" id="btnCredits">⭐ Credits</button>
+            <button class="menuBtn" id="btnSettings">⚙ Settings</button>
+          </div>
+
+          <div id="panelCredits" class="panel">
+            <div class="panelTitle">Credits</div>
+            <div class="panelText">GameMaker: Enzo</div>
+          </div>
+
+          <div id="panelSettings" class="panel">
+            <div class="panelTitle">Settings</div>
+            <label class="toggle">
+              <input type="checkbox" id="toggleSfx" checked />
+              <span>Sound Effects</span>
+            </label>
+            <div class="hint">Tip: On mobile, tap Jump. Enter pipe: stand on top + Down.</div>
+          </div>
+
+          <div class="hintRow">
+            Controls: <b>A/D</b> or <b>←/→</b> move • <b>Space</b> jump • <b>↓</b> enter pipe
+          </div>
+        </div>
+      </div>
+
+      <!-- Level Complete -->
+      <div id="screenWin" class="screen hidden">
+        <div class="card winCard">
+          <div class="winTitle">🏁 Level Complete!</div>
+          <div class="winText">You grabbed the flag! Confetti time 🎉</div>
+          <button class="menuBtn" id="btnPlayAgain">Play Again</button>
+        </div>
+      </div>
+
+      <!-- Mobile Controls -->
+      <div id="mobileControls">
+        <button class="mBtn" data-k="left">◀</button>
+        <button class="mBtn" data-k="right">▶</button>
+        <button class="mBtn" data-k="down">▼</button>
+        <button class="mBtn" data-k="jump">⤒</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>
