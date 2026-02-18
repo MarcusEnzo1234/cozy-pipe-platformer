@@ -678,19 +678,37 @@
       if (w.x < w.min) { w.x = w.min; w.dir = 1; }
       if (w.x > w.max) { w.x = w.max; w.dir = -1; }
 
-      if (overlap(player, w)) {
-        const prevBottom = (player.y - player.vy * dt) + player.h;
-        const stomp = (player.vy > 0) && (prevBottom <= w.y + 8);
-        if (stomp) {
-          w.alive = false;
-          player.vy = -JUMP * 0.55;
-          beep(980, 0.05, "triangle", 0.05);
-        } else {
-          hurt();
-          break;
-        }
-      }
+      if (overlap(player, blob)) {
+  const playerBottom = player.y + player.h;
+  const blobTop = blob.y;
+
+  // More forgiving stomp rule:
+  // - player is falling
+  // - player's bottom is near the top of the boss
+  const stomp = (player.vy > 120) && (playerBottom - blobTop < 22);
+
+  if (stomp) {
+    blob.hp--;
+    blob.stun = 0.55;
+
+    // bounce player up
+    player.vy = -JUMP * 0.70;
+    player.y = blob.y - player.h - 1;
+
+    beep(1040, 0.06, "triangle", 0.05);
+
+    if (blob.hp <= 0) {
+      blob.alive = false;
+      portal.active = true; // unlock portal
+      beep(520, 0.08, "square", 0.05);
+      beep(660, 0.08, "square", 0.05);
+      beep(820, 0.08, "square", 0.05);
     }
+  } else {
+    hurt();
+  }
+}
+
 
     // boss zone
     if (state === "play" && player.x > 4550) state = "boss";
