@@ -2,78 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Cozy Pipe Platformer</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <div id="wrap">
-    <canvas id="game"></canvas>
 
-    <!-- UI Layer -->
-    <div id="ui">
-      <div class="topbar">
-        <div class="chip">🌤️ Cozy Pipe Platformer</div>
-        <div class="chip" id="hud">
-          Coins: <span id="coins">0</span> • Hearts: <span id="hearts">3</span>
-        </div>
-        <div class="right">
-          <button class="btn" id="btnFs">⛶ Fullscreen</button>
-          <button class="btn" id="btnRestart">↻ Restart</button>
-        </div>
+  <!-- Menu Screen -->
+  <div id="menu" class="screen">
+    <div class="panel">
+      <h1 class="title">Cozy Pipe Platformer</h1>
+      <p class="sub">A cute, cozy platformer — stomp slimes, collect coins, defeat Blobking 👑</p>
+
+      <div class="row">
+        <button id="startBtn" class="btn primary">Start</button>
+        <button id="creditsBtn" class="btn">Credits</button>
       </div>
 
-      <!-- Title Screen -->
-      <div id="screenTitle" class="screen">
-        <div class="card titleCard">
-          <img id="logoImg" class="logo" alt="Cozy Pipe Platformer logo" />
-          <div class="subtitle">A cozy, kid-friendly pixel platform adventure ✨</div>
-
-          <div class="menu">
-            <button class="menuBtn" id="btnStart">▶ Start Game</button>
-            <button class="menuBtn" id="btnCredits">⭐ Credits</button>
-            <button class="menuBtn" id="btnSettings">⚙ Settings</button>
-          </div>
-
-          <div id="panelCredits" class="panel">
-            <div class="panelTitle">Credits</div>
-            <div class="panelText">GameMaker: Enzo</div>
-          </div>
-
-          <div id="panelSettings" class="panel">
-            <div class="panelTitle">Settings</div>
-            <label class="toggle">
-              <input type="checkbox" id="toggleSfx" checked />
-              <span>Sound Effects</span>
-            </label>
-            <div class="hint">Tip: On mobile, tap Jump. Enter pipe: stand on top + Down.</div>
-          </div>
-
-          <div class="hintRow">
-            Controls: <b>A/D</b> or <b>←/→</b> move • <b>Space</b> jump • <b>↓</b> enter pipe
-          </div>
-        </div>
+      <div class="row smallRow">
+        <button id="soundBtn" class="btn small">🔊 Sound: ON</button>
+        <button id="fsBtn" class="btn small">⛶ Fullscreen</button>
       </div>
 
-      <!-- Level Complete -->
-      <div id="screenWin" class="screen hidden">
-        <div class="card winCard">
-          <div class="winTitle">🏁 Level Complete!</div>
-          <div class="winText">You grabbed the flag! Confetti time 🎉</div>
-          <button class="menuBtn" id="btnPlayAgain">Play Again</button>
-        </div>
-      </div>
+      <p class="hint">
+        <b>PC:</b> A/D or ←/→ move • Space jump • S/↓ enter pipe<br>
+        <b>Mobile:</b> Use the buttons below
+      </p>
+    </div>
+  </div>
 
-      <!-- Mobile Controls -->
-      <div id="mobileControls">
-        <button class="mBtn" data-k="left">◀</button>
-        <button class="mBtn" data-k="right">▶</button>
-        <button class="mBtn" data-k="down">▼</button>
-        <button class="mBtn" data-k="jump">⤒</button>
+  <!-- Credits Screen -->
+  <div id="credits" class="screen hidden">
+    <div class="panel">
+      <h2 class="title smaller">Credits</h2>
+      <p class="sub">GameMaker: Enzo</p>
+      <p class="sub tiny">
+        (Optional credit) CC0 pack inspired by analogStudios_ & RottingPixels • Music/SFX by Brackeys & team • Font: HarvettFox96
+      </p>
+      <div class="row">
+        <button id="backBtn" class="btn">← Back</button>
       </div>
     </div>
   </div>
 
-  <script src="game.js"></script>
+  <!-- Game Screen -->
+  <div id="gameWrap" class="game hidden">
+    <canvas id="game"></canvas>
+
+    <div class="hud">
+      <div class="pill">🪙 <span id="coinCount">0</span></div>
+      <div class="pill">❤️ <span id="hearts">3</span></div>
+      <div class="pill center">⭐ <span id="status">Find Blobking!</span></div>
+      <button id="homeBtn" class="btn small">⌂ Home</button>
+    </div>
+
+    <!-- Mobile controls -->
+    <div class="mobileControls">
+      <button class="mBtn" data-k="left">◀</button>
+      <button class="mBtn" data-k="right">▶</button>
+      <button class="mBtn jump" data-k="jump">⤒</button>
+      <button class="mBtn" data-k="down">▼</button>
+    </div>
+
+    <!-- Win overlay -->
+    <div id="win" class="overlay hidden">
+      <div class="panel">
+        <h2 class="title smaller">🎉 YOU WIN!</h2>
+        <p class="sub">You beat Blobking and escaped through the Cozy Portal ✨</p>
+        <div class="row">
+          <button id="playAgainBtn" class="btn primary">Play Again</button>
+          <button id="menuBtn" class="btn">Home</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Music (optional file) -->
+  <audio id="bgm" src="assets/audio/bgm.mp3" loop preload="auto"></audio>
+
+  <script src="js/game.js"></script>
 </body>
 </html>
